@@ -4,7 +4,6 @@ public class Seat {
     private int number;
     private int row;
     private boolean isOccupied;
-    private Hall hall;
 
     public Seat(int number, int row) {
         this.id = ++idcounter;

@@ -8,13 +8,13 @@ public class Main {
         tuttiATeatro.addSite("Teatro greco di Siracusa", "Via Luigi Bernabò Brea", "Siracusa", true);
         tuttiATeatro.addSite("Arena di Verona", "Piazza Bra", "Verona", true);
 
-        Connection connection = DriverManager.getConnection(DBConnection.getUrl(), DBConnection.getUsername(), DBConnection.getPassword());
-        User donald = tuttiATeatro.getUserById(connection, 2);
-        User dario = tuttiATeatro.getUserById(connection, 1);
-
-
+        Connection connection = DBConnection.getConnection();
+        User donald = tuttiATeatro.getUserById(2);
+        User dario = tuttiATeatro.getUserById(1);
         donald.printInfo();
         dario.printInfo();
+
+        tuttiATeatro.suggestSpectacles(dario);
 
         connection.close();
 
