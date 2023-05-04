@@ -40,22 +40,48 @@ public class JTheatre {
         return user;
     }
 
-    public void addSite(String name, String address, String city, boolean isOutdoor){
-        Site newSite = new Site(name, address, city, isOutdoor);
+    public Spectacle getSpectacleById(int id) throws SQLException {
+        Connection connection = DBConnection.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM PERFORMANCE WHERE ID = " + id);
+        Spectacle spectacle = null;
+
+        while(resultSet.next()){
+            String name = resultSet.getString("name");
+            Timestamp schedule = resultSet.getTimestamp("schedule");
+            int duration = resultSet.getInt("duration");
+            double price = resultSet.getDouble("price");
+            String genre = resultSet.getString("genre");
+            spectacle = new Spectacle(id, name, schedule, duration, price, genre);
+        }
+        connection.close();
+        return spectacle;
     }
 
-    public void addHall(String name, Site site){
-        Hall newHall = new Hall(name);
-        site.addHall(newHall);
+    public Seat getSeatById(int id) throws SQLException {
+        Connection connection = DBConnection.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM SEAT WHERE ID = " + id);
+        Seat seat = null;
+        while(resultSet.next()){
+            int number = resultSet.getInt("seat_number");
+            int row = resultSet.getInt("seat_row");
+            int hall_id = resultSet.getInt("hall_id");
+            seat = new Seat(id, number, row, hall_id);
+        }
+        connection.close();
+        return seat;
     }
 
-    public void addSpectacle(String name, LocalDate schedule, int duration, double price, String genre, Hall hall){
-        Spectacle newSpectacle = new Spectacle(name, schedule, duration, price, genre);
-        hall.addSpectacle(newSpectacle);
-    }
-
-    public void addSeat(Hall hall, int number, int row){
-        hall.addSeat(new Seat(number, row));
+    public void addSeatsToHall(int numberOfSeatPerRow, int numberOfRow, int hall_id) throws SQLException {
+        Connection connection = DBConnection.getConnection();
+        Statement statement = connection.createStatement();
+        for(int i = 1; i <= numberOfRow; i++){
+            for(int j = 1; j <= numberOfSeatPerRow; j++){
+                statement.executeUpdate("INSERT INTO SEAT(HALL_ID, SEAT_ROW, SEAT_NUMBER) VALUES(" + hall_id +", " + i + ", " + j + ")");
+            }
+        }
+        connection.close();
     }
 
     public Set<Spectacle> suggestSpectacles(User u) throws SQLException {

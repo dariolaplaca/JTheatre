@@ -1,17 +1,15 @@
-import java.time.LocalDate;
+import java.sql.Timestamp;
 
 public class Spectacle {
     private int id;
-    private static int idcounter;
-    private LocalDate schedule;
+    private Timestamp schedule;
     private String name;
-    //java.sql.Date ?
     private int duration;
     private double price;
     private String genre;
 
-    public Spectacle(String name, LocalDate schedule, int duration, double price, String genre) {
-        this.id = ++idcounter;
+    public Spectacle(int id, String name, Timestamp schedule, int duration, double price, String genre) {
+        this.id = id;
         this.name = name;
         this.schedule = schedule;
         this.duration = duration;
@@ -24,11 +22,11 @@ public class Spectacle {
     }
 
 
-    public LocalDate getSchedule() {
+    public Timestamp getSchedule() {
         return this.schedule;
     }
 
-    public void setSchedule(LocalDate schedule) {
+    public void setSchedule(Timestamp schedule) {
         this.schedule = schedule;
     }
 

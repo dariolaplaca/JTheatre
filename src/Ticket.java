@@ -2,13 +2,12 @@ import java.util.Date;
 
 public class Ticket {
     private int id;
-    private static int idcounter;
     private Date date;
     User user;
     Seat seat;
 
-    public Ticket(Date date, User user, Seat seat) {
-        this.id = ++idcounter;
+    public Ticket(int id, Date date, User user, Seat seat) {
+        this.id = id;
         this.date = date;
         this.user = user;
         this.seat = seat;

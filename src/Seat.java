@@ -1,15 +1,14 @@
 public class Seat {
     private int id;
-    private static int idcounter;
     private int number;
     private int row;
-    private boolean isOccupied;
+    private int hall_id;
 
-    public Seat(int number, int row) {
-        this.id = ++idcounter;
+    public Seat(int id, int number, int row, int hall_id) {
+        this.id = id;
         this.number = number;
         this.row = row;
-        isOccupied = false;
+        this.hall_id = hall_id;
     }
 
     public int getId() {
@@ -32,15 +31,13 @@ public class Seat {
         this.row = row;
     }
 
-    public boolean isOccupied() {
-        return this.isOccupied;
+    public int getHall_id() {
+        return this.hall_id;
     }
 
-    public void occupy() {
-        isOccupied = true;
+    public void setHall_id(int hall_id) {
+        this.hall_id = hall_id;
     }
 
-    public void free(){
-        isOccupied = false;
-    }
 }
+

@@ -1,18 +1,12 @@
-import java.util.HashSet;
-import java.util.Set;
-
 public class Hall {
     private int id;
-    private static int idcounter;
     private String name;
-    private Set<Seat> seats;
-    private Set<Spectacle> spectacles;
+    private int site_id;
 
-    public Hall(String name) {
-        id = ++idcounter;
+    public Hall(int id, String name, int site_id) {
+        this.id = id;
         this.name = name;
-        seats = new HashSet<>();
-        spectacles = new HashSet<>();
+        this.site_id = site_id;
     }
 
     public int getId() {
@@ -27,23 +21,11 @@ public class Hall {
         this.name = name;
     }
 
-    public Set<Seat> getSeats() {
-        return this.seats;
+    public int getSite_id() {
+        return this.site_id;
     }
 
-    public void setSeats(Set<Seat> seats) {
-        this.seats = seats;
-    }
-
-    public Set<Spectacle> getSpectacles() {
-        return this.spectacles;
-    }
-
-    public void addSeat(Seat seat){
-        this.seats.add(seat);
-    }
-
-    public void addSpectacle(Spectacle spectacle){
-        this.spectacles.add(spectacle);
+    public void setSite_id(int site_id) {
+        this.site_id = site_id;
     }
 }
